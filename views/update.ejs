@@ -1,0 +1,20 @@
+<!-- update.ejs -->
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+  <h2>Update Todo</h2>
+
+  <form action="/update/todo/<%= todo._id %>" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input type="text" name="todo" class="form-control" id="todo" value="<%= todo.todo %>">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea name="description" class="form-control" id="description"><%= todo.description %></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Todo</button>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
