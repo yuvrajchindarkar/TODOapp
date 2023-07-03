@@ -1,0 +1,75 @@
+<%- include("partials/header") %>
+    <h1>Register</h1>
+    <form id="registerForm">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <h1>Login</h1>
+    <form id="loginForm">
+        <div>
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" required>
+        </div>
+        <div>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                const data = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+
+                try {
+                    const response = await fetch('/user/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Registration failed.');
+                    }
+
+                    const result = await response.json();
+                    console.log(result); // Handle the response from the backend
+                    // Redirect to a different page or perform any other action
+                } catch (error) {
+                    console.error('Error:', error); // Handle any errors
+                }
+            });
+        });
+
+    </script>
+    <%- include("partials/footer") %>

@@ -8,8 +8,6 @@ router.post("/add/todo", (req, res) => {
     const newTodo = new mytodo({todo, description})
 
     ///save the todo
-
-
     newTodo.save()
     .then(() => {
         console.log("Succcessfullyy add todo")
